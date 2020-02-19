@@ -1,2 +1,0 @@
-# psprac
-algorithm study
