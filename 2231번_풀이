@@ -1,0 +1,28 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+	int num;
+	cin >> num;
+	int answer = 0;
+
+	for (int i = 1; i < num; i++) {
+		int sum = 0;
+		int k = i;
+		while (k / 10 != 0) { // for문 돌리는 수의 자리수 -1 만큼 나누면서 자리수 더해주는 while문
+			int temp = k % 10;
+			k /= 10;
+			sum += temp;
+		}
+		sum += k;	//while문에서 자리수 -1만큼 해주기 때문에 맨 첫자리는 따로 더해준다
+		sum += i;
+
+		if (sum == num) {
+			answer = i;
+			break; //최소 수를 리턴해야 함으로.
+		}
+	}
+
+	cout << answer;
+}
