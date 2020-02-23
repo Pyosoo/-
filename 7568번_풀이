@@ -1,0 +1,33 @@
+#include <iostream>
+#include <vector>
+#include <utility>
+using namespace std;
+
+
+int main() {
+	int N;
+	cin >> N;
+
+	int size[50][2];
+
+	for (int i = 0; i < N; i++) {
+		int height, weight;
+		cin >> height >> weight;
+		size[i][0] = height;
+		size[i][1] = weight;
+	}
+	int rank[50] = { 0, };
+	for (int i = 0; i < N; i++) {
+		int ranking = 1;
+		for (int j = 0; j < N; j++) {
+			if (size[i][0] < size[j][0] && size[i][1] < size[j][1]) { //자기보다 덩치가 큰사람을 찾으면
+				ranking++;
+			}
+		}
+		rank[i] = ranking;
+	}
+
+	for (int i = 0; i < N; i++) {
+		cout << rank[i] << " ";
+	}
+}
