@@ -1,0 +1,36 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+#include <vector>
+int main() {
+	int man[9];
+	int sum = 0;
+	for (int i = 0; i < 9; i++) {
+		cin >> man[i];
+		sum += man[i];
+	}
+
+	//7난쟁이의 합은 100이다
+	int a =0, b=0;
+	for (int i = 0; i < 8; i++) {
+		for (int j = i + 1; j < 9; j++) {
+			if ((sum - man[i] - man[j]) == 100) {
+				a = man[i];
+				b = man[j];
+			}
+		}
+	}
+	int answer[7]; int index = 0;
+	for (int i = 0; i < 9; i++) {
+		if (man[i] != a && man[i] != b) {
+			answer[index++] = man[i];
+		}
+	}
+	
+
+
+	sort(answer, answer+7);
+	for (int i = 0; i < 7; i++) {
+		cout << answer[i] << endl;
+	}
+}
