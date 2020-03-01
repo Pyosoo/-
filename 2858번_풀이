@@ -1,0 +1,38 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+
+	int L, W;
+
+	int red, brown;
+
+	cin >> red >> brown;
+
+	// 2*L + 2*W - 4가 red의 개수가 나온다
+	// (L - 2) * (W - 2) = brown의 개수
+	// 우리는 L과 W를 구해야 한다.
+
+	// L + W = (red + 4) / 2
+	// (L - 2) * (W - 2) = brown
+
+	// L + W = L_W
+	int L_W = (red + 4) / 2; //항상 짝수 이므로
+
+	int width = 0;
+	for (int i = 1; i < L_W - 1; i++) {
+		width = L_W - i;
+		if ((i - 2) * (width - 2) == brown) {
+			L = i;
+			W = width;
+			break;
+		}
+	}
+	if (W > L) {
+		int temp = W;
+		W = L;
+		L = temp;
+	}
+	cout << L << " " << W;
+	return 0;
+}
