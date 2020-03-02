@@ -1,0 +1,38 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+int T;
+vector<int> v;
+int sum = 0;
+int Count = 0;
+void dfs(int number) {
+	//탈출조건
+	if (sum == number) {
+		Count++;
+		return;
+	}
+
+	for (int i = 1; i <= 3; i++) {
+		if (sum + i <= number) {
+			sum += i;
+			dfs(number);
+			sum -= i;
+		}
+	}
+}
+int main() {
+	cin >> T;
+	for (int i = 0; i < T; i++)
+	{
+		int temp; cin >> temp;
+		v.push_back(temp);
+	}
+
+	vector<int>::iterator it = v.begin();
+	for (it; it != v.end(); it++) {
+		dfs(*it);
+		sum = 0;
+		cout << Count << endl;
+		Count = 0;
+	}
+}
