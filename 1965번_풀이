@@ -1,0 +1,32 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+	vector<int> number;
+	vector<int> result;
+	int N;
+	cin >> N;
+	for (int i = 0; i < N; i++) {
+		int temp;
+		cin >> temp;
+		number.push_back(temp);
+		result.push_back(0);
+	}
+	result[0] = 1;
+	for (int i = 1; i < N; i++) {
+		int max = result[0];
+		for (int j = 0; j < i; j++) {
+			if (result[j] >= max && number[j] < number[i]) max = result[j]+1;
+		}
+		result[i] = max;
+
+	}
+
+	int answer = 0;
+	for (int i = 0; i < N; i++) {
+		if (answer < result[i]) answer = result[i];
+	}
+	cout << answer;
+
+}
