@@ -1,0 +1,43 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+	int N; // Number of Team
+	cin >> N;
+	int *score = new int[N+1]; // Each score of Team
+	int *ranking = new int[N + 1]; // Each rank of Team
+	for (int i = 0; i < N + 1; i++) {
+		score[i] = 0; ranking[i] = 1;
+	}
+	
+	int home, away, home_point, away_point;
+
+	for (int i = 0; i < N*(N-1)/2; i++) {
+		cin >> home >> away >> home_point >> away_point;
+		
+		if (home_point == away_point) { //draw +1, +1
+			score[home]++;
+			score[away]++;
+		}
+		else if (home_point > away_point) { // home win +3 , 0
+			score[home] += 3;
+		}
+		else if (home_point < away_point) { //away win 0, +3
+			score[away] += 3;
+		}
+	}
+
+	for (int i = 1; i < N + 1; i++) {
+		for (int j = 1; j < N+1; j++) {
+			if (score[i] < score[j]) {
+				ranking[i]++;
+			}
+		}
+	}
+	
+	for (int i = 1; i < N + 1; i++) {
+		cout << ranking[i] << endl;
+	}
+	
+}
