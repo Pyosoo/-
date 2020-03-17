@@ -1,0 +1,42 @@
+#include <iostream>
+using namespace std;
+char **map;
+
+void makeMap(int x, int y, int value) {
+	if (value == 1) {
+		map[x][y] = '*';  
+		return;
+	}
+	int num = value / 3;
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			if (i == 1 && j == 1) { continue; }
+			else {
+				makeMap(x + (num*i), y + (num*j), num);
+			}
+		}
+	}
+	return;
+}
+
+int main()
+{
+	int N;
+	cin >> N;
+	map = new char*[N];
+	for (int i = 0; i < N; i++) {
+		map[i] = new char[N];
+	}
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < N; j++) {
+			map[i][j] = ' ';
+		}
+	}
+	makeMap(0, 0, N);
+
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < N; j++) {
+			cout << map[i][j];
+		}cout << endl;
+	}
+}
