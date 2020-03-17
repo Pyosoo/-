@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream> //별찍기
 using namespace std;
 char **map;
 
