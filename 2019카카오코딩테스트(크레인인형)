@@ -1,0 +1,35 @@
+#include <string>
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int solution(vector<vector<int>> board, vector<int> moves) {
+    int answer = 0; //터진 인형의 개수 2개가되면 터짐
+    
+    int current_pick = 0;
+    vector<int> basket;
+    basket.push_back(0);
+    vector<int>::iterator it = moves.begin();
+    
+    for(it; it!=moves.end(); it++){
+        int current_line = *it - 1;
+        for(int i=0 ;i<board.size(); i++){
+            if(board[i][current_line] != 0){ //만약 인형을 집어올렸다면
+                current_pick = board[i][current_line]; //이 인형의 번호
+                board[i][current_line] = 0; //인형이 있던 자리는 0으로만들어주고
+                int last_pick = basket.back();
+                if(last_pick == current_pick){
+                    basket.pop_back();
+                    answer += 2;
+                }else {
+                    basket.push_back(current_pick);
+                }
+                break;
+             }
+        }
+        
+    }
+    
+    return answer;
+}
+
