@@ -1,0 +1,40 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+
+	int N;
+	cin >> N;
+	
+	int answer = 0;
+	
+	while (N--) {
+		bool used[26] = { false, };
+		bool flag = true; //true면 정답이 된다는거 -> answer++
+
+		string str;
+		cin >> str;
+		char before = str[0]; 
+		used[str[0] - 97] = true;
+		for (int i = 1; i < str.length(); i++) {
+			if (before != str[i]) { //새로운 스펠링이 나왔으면
+				if (used[str[i] - 97] == true) { //정답이안된다면
+					flag = false;
+				}
+				else { //전에 안나왔던거라 괜찮으면
+					used[str[i] - 97] = true;
+					before = str[i];
+				}
+			}
+		}
+		if (flag == true) answer++;
+	}
+
+	cout << answer;
+}
+
+
+
+// if문과 for문을 사용하다보면 break를 써서 종료시켜야 하는 상황과 아닌 상황이 헷갈릴 때가 많다
+// 그럴땐 flag를 이용하면 해결인된다.. flag를 자주 이용하자!
