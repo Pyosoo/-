@@ -1,0 +1,33 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+
+int main() {
+	
+	vector<string> str;
+	int N; 
+	cin >> N;
+	for (int i = 0; i < N; i++) {
+		string temp;
+		cin >> temp;
+		str.push_back(temp);
+	}
+
+	string answer = "";
+	bool flag = false;
+	for (int i = 0; i < str[0].length(); i++) {
+		char a = str[0][i];
+		bool flag = false;
+		for (int j = 0; j < N; j++) {
+			if (str[j][i] != a) {
+				flag = true; //flag가 true이면 ? 로 나와야 함
+				break;
+			}
+		}
+		if (flag == true) answer += "?";
+		else answer += a;
+	}
+	cout << answer;
+}
