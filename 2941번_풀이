@@ -1,0 +1,55 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+//변경 되는 것 : c=  c-  dz=  d-  lj  nj  s=  z=    ->한글자로 변경됨 
+
+int main() {
+	
+	string str;
+	cin >> str;
+
+	string temp = "";
+	string temp2 = "";
+	int answer = 0;
+
+	
+	//2글자짜리
+	for (int i = 0; i < str.length() - 1; i++) {
+		temp = str[i];
+		temp += str[i + 1];
+		if (temp == "c=" || temp == "c-" || temp == "d-" || temp == "lj" ||
+			temp == "nj" || temp == "s=" || temp == "z=")
+		{
+			answer += 1;
+			str.erase(i, 2);
+			if (i == 0) i = -1;
+			else i -= 1;
+			if (str.length() == 0 || str.length() == 1) break;
+		}
+		temp2 = temp + str[i + 2];
+		if (temp2 == "dz=") {
+			answer += 1;
+			str.erase(i, 3);
+			if (i == 0) i = -1;                    // Key point
+			else i -= 1;
+			if (str.length() == 0 || str.length() == 1) break;
+		}
+		temp = "";
+		temp2 = "";
+	
+	}
+	
+
+	answer += str.length(); 
+	cout << answer;
+
+}
+
+
+
+
+// 3번의 실패... 이유는 내 풀이방식의 key point인 부분이다.
+// 해당 문자열을 변경된것이라고 정하면 문자열에서 erase를 이용하여 삭제후 index는 for문에 의해
+// 1씩 증가하게 되므로 -1을 해줌으로써 문자열을 삭제된 위치부터 다시 검사할 수 있게해주는 것이다.
+// but index가 0일때 변경된문자열로 쳐버리면 -1이 되므로 0일때만 예외처릴 해주면된다~
