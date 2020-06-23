@@ -1,0 +1,65 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+#define MAX 101
+int M, N, K; //M행의 갯수, N열의 갯수, K사각혀의 객수
+int visited[MAX][MAX] = { 0, };
+int map[MAX][MAX] = { 0, };
+int cnt = 0;
+
+int dx[4] = { 0, 0, 1, -1 };
+int dy[4] = { 1, -1, 0, 0 };
+
+void dfs(int x, int y) {
+	visited[x][y] = 1;
+	cnt++;
+	for (int i = 0; i < 4; i++) {
+		int nx = x + dx[i];
+		int ny = y + dy[i];
+		if (nx < 0 || nx >= M || ny < 0 || ny >= N) {
+			continue;
+		}
+		if (map[nx][ny] == 0 && visited[nx][ny] != 1) {
+			dfs(nx, ny);
+		}
+	}
+}
+
+int main() {
+	cin >> M >> N >> K;
+	vector<int> answer;
+	for (int i = 0; i < K; i++) {
+		int x1, y1, x2, y2;
+		cin >> y1 >> x1 >> y2 >> x2;
+		for (int i = x1; i < x2; i++) {
+			for (int k = y1; k < y2; k++) {
+				map[i][k] = 1;
+				visited[i][k] = 1;
+			}
+		}
+	}
+
+	for (int i = 0; i < M; i++) {
+		for (int k = 0; k < N; k++) {
+			if (map[i][k] == 0 && !visited[i][k]) {
+				cnt = 0;
+				dfs(i, k);
+				answer.push_back(cnt);
+			}
+		}
+	}
+
+	vector<int>::iterator it = answer.begin();
+	sort(answer.begin(), answer.end());
+	cout << answer.size() << endl;
+	for (int i = 0; i < answer.size(); i++) {
+		cout << answer[i] << " ";
+	}
+}
+
+
+
+전형적인 DFS.
+헷갈리는 부분은 x,y의 좌표를 받을때 순서가 좌측아래의 좌표와 우측 위의 좌표를 받는다는점. 순서를 잘받아줘야함
