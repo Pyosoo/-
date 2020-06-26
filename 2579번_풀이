@@ -1,0 +1,31 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <math.h>
+using namespace std;
+
+int point[301] = { 0, }; // 각 index의 점수
+int dp[301] = { 0, }; // index 까지 오는데의 최대 점수의 합 
+
+// long long int 크기도 벗어남?
+int main() {
+	int N;
+	cin >> N;
+	for (int i = 1; i <= N; i++) {
+		cin >> point[i];
+	}
+	dp[0] = 0;
+	dp[1] = point[1];
+	dp[2] = point[1] + point[2];
+	
+	for (int i = 3; i < 301; i++) {
+		dp[i] = max((dp[i - 3] + point[i - 1] + point[i]), (dp[i - 2] + point[i]));
+	}
+	cout << dp[N];
+}
+	
+  
+  
+시작점을 기준으로 하는것이 아니라,
+각 index 지점에서 그 전에 어디를 밟고 왔는지가 중요한 것이었다..
+
