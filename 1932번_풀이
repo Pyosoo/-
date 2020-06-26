@@ -1,0 +1,59 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <math.h>
+using namespace std;
+
+int dp[501][501] = { 0, };
+int input[501][501] = { 0, };
+
+int main() {
+	int N;
+	cin >> N;
+	for (int i = 0; i < N; i++) {
+		for (int k = 0; k < i + 1; k++) {
+			cin >> input[i][k];
+		}
+	}
+	dp[0][0] = input[0][0];
+	dp[1][0] = input[0][0] + input[1][0];
+	dp[1][1] = input[0][0] + input[1][1];
+
+	for (int i = 2; i < N; i++) {
+		for (int k = 0; k < i + 1; k++) {
+			int from_left=0, from_right=0;
+			if (k == 0) { //왼쪽맨끝에 있는 수
+				from_left = 0;
+				from_right = dp[i - 1][k] + input[i][k];
+				dp[i][k] = from_right;
+			}
+			else if (i == k) { //오른쪽맨 끝에있는 수
+				from_left = dp[i - 1][k - 1] + input[i][k];
+				from_right = 0;
+				dp[i][k] = from_left;
+			}
+			else {
+				from_left = dp[i - 1][k - 1] + input[i][k];
+				from_right = dp[i - 1][k] + input[i][k];
+				dp[i][k] = max(from_left, from_right);
+			}
+		}
+	}
+
+	
+	vector<int> last_line;
+	for (int k = 0; k < N; k++) {
+		last_line.push_back(dp[N - 1][k]);
+	}
+
+	int max = *max_element(last_line.begin(), last_line.end());
+	cout << max;
+}
+	
+  
+  
+  
+  
+ 핵심은 dp행렬의 맨왼쪽 라인과 맨오른쪽 라인은 항상 정해진 값을 받게 되는 것이고
+ 중간에 껴있는 수는 왼쪽과 오른쪽 중 큰 수에다 자기자신을 더해서 만들어지는 것이다!
+ 
