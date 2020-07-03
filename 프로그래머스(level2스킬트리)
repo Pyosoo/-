@@ -53,7 +53,7 @@ int solution(string skill, vector<string> skill_trees) {
             cout << "답이 됨" << endl;
             answer++;
         }
-    }
+    }  
    
     return answer;
 }
