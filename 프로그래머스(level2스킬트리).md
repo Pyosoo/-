@@ -30,7 +30,7 @@ int solution(string skill, vector<string> skill_trees) {
          for(int i=0; i<skill.length(); i++){
             cout << pos_of_skill[i] << " ";
         }
-        cout << endl;
+        cout << endl; 
         
         
         for(int m = 0; m<skill.length()-1; m++){
