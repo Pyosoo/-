@@ -1,0 +1,37 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<int> arr;
+vector<int> temp;
+bool used[100] = { false, };
+
+void printUsed() {
+	for (int i = 0; i < 5; i++) {
+		if (used[i] == true) cout << i + 1 << " ";
+	}cout << endl;
+}
+
+void dfs(int index, int Count) {
+	if (Count == 3) {
+		printUsed();
+		return;
+	}
+
+	for (int i = index; i < 5; i++) {
+		if (used[i] == true) continue;
+		used[i] = true;
+		dfs(i, Count + 1);
+		used[i] = false;
+	}
+}
+
+
+int main() {
+	for (int i = 1; i <= 5; i++) arr.push_back(i);
+
+	for (int i = 0; i < 5; i++) {
+		dfs(i, 0); // 1st: arr를 읽을 첫번째 index ,  2nd: 현재 선택된 숫자의 수
+	}
+	
+}
